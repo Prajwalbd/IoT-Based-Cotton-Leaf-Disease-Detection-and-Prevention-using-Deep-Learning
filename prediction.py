@@ -10,10 +10,10 @@ from io import BytesIO
 from tensorflow.keras.applications import MobileNetV2
 import pandas as pd
 
-model = tf.keras.models.load_model('model.h5')  
+model = tf.keras.models.load_model(' ')  # Load trained model
 feature_extractor = MobileNetV2(include_top=False, input_shape=(224, 224, 3), pooling='avg')
 
-class_labels = ['Bacterial_Blight', 'Fussarium_wilt', 'Healthy', 'red_leaf']
+class_labels = ['Bacterial_Blight', 'Fussarium_wilt', 'Healthy', 'red_leaf'] # Alter as per required
 disease_solutions = {
     'Bacterial_Blight': "- Spray **Copper Oxychloride (2.5 g/l)** every 10–15 days.\n"
     "- For severe cases, combine with **Streptocycline (0.1 g/l)**.\n"
@@ -35,7 +35,7 @@ disease_solutions = {
 }
 
 def send_to_esp32(disease, accuracy, remedies, esp32_ip=''):
-    url = f"{esp32_ip}/update"
+    url = f"{esp32_ip}/update"    #ESP Url to connect the hardware  
     payload = {
         "disease": disease,
         "accuracy": accuracy,  
@@ -181,3 +181,4 @@ uploaded_file = st.file_uploader("📁 Upload a cotton leaf image", type=["jpg",
 if uploaded_file:
     image = Image.open(uploaded_file)
     show_prediction(image)
+
